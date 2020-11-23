@@ -11,16 +11,9 @@ class ItemController extends Controller
 {
     public function index()
     {
-        if(request()->ajax()) {
-            $items = Item::all();
-            return datatables()->of($items)
-            ->addColumn('action', 'items.action')
-            ->rawColumns(['action'])
-            ->addIndexColumn()
-            ->make(true);
-        }
+        $items = Item::all();
 
-        return view('items.index');
+        return view('items.index', compact('items'));
     }
 
     public function create()

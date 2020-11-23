@@ -7,7 +7,7 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
-
+use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------

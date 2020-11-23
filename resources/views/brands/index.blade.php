@@ -18,9 +18,10 @@
 
     {{-- data table --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link  href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 </head>
 <body>
@@ -78,7 +79,7 @@
                     </div>
                 @endif
             
-                <table class="table table-striped" id="datatable-crud">
+                <table class="table table-striped" id="example">
                     <thead>
                         <tr>
                             <th>No</th>
@@ -86,50 +87,43 @@
                             <th width="120px">Action</th>
                         </tr>
                     </thead>
+
+                    <tbody>
+                        @foreach ($brands as $brand)
+                        <tr>
+                            <td>{{ $brand->id }}</td>
+                            <td>{{ $brand->nama_merek }}</td>
+                            <td>
+                                <form action="{{ route('brands.destroy',$brand->id) }}" method="POST">
+                                    
+                                    <a class="btn btn-primary" href="{{ route('brands.edit',$brand->id) }}">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
+                                        </svg>
+                                    </a>
+                
+                                    @csrf
+                                    @method('DELETE')
+                    
+                                    <button type="submit" class="btn btn-danger">
+                                        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-trash" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4L4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
 
-                <script type="text/javascript">
-                    $(document).ready( function () {
-                        $.ajaxSetup({
-                            headers: {
-                                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                            }
-                        });
-
-                        $('#datatable-crud').DataTable({
-                            processing: true,
-                            serverSide: true,
-                            ajax: "{{ url('brands') }}",
-                            columns: [
-                                { data: 'id', name: 'id' },
-                                { data: 'nama_merek', name: 'nama_merek' },
-                                {data: 'action', name: 'action', orderable: false},
-                            ],
-                        });
-
-                        $('body').on('click', '.delete', function () {
-                            if (confirm("Delete Record?") == true) {
-                                var id = $(this).data('id');
-                                // ajax
-                                $.ajax({
-                                    type:"POST",
-                                    url: "{{ url('brands') }}",
-                                    data: { id: id},
-                                    dataType: 'json',
-                                    success: function(res){
-                                        var oTable = $('#datatable-crud').dataTable();
-                                        oTable.fnDraw(false);
-                                    }
-                                });
-                            }
-                        });
-                    });
+                <script>
+                    $(document).ready(function() {
+                        $('#example').DataTable();
+                    } );
                 </script>
 
-                <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-                <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-                <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-                
             </main>
         </div>
     </div>

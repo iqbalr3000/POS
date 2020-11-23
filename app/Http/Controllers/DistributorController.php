@@ -10,16 +10,9 @@ class DistributorController extends Controller
 
     public function index()
     {
-        if(request()->ajax()) {
-            $distributors = Distributor::all();
-            return datatables()->of($distributors)
-            ->addColumn('action', 'distributors.action')
-            ->rawColumns(['action'])
-            ->addIndexColumn()
-            ->make(true);
-        }
+        $distributors = Distributor::all();
 
-        return view('distributors.index');
+        return view('distributors.index', compact('distributors'));
     }
 
 

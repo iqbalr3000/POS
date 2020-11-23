@@ -11,15 +11,9 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        if(request()->ajax()) {
-            $transactions = Transaction::all();
-            return datatables()->of($transactions)
-            ->addColumn('action', 'transactions.action')
-            ->rawColumns(['action'])
-            ->addIndexColumn()
-            ->make(true);
-            }
-        return view('transactions.index');
+        $transactions = Transaction::all();
+           
+        return view('transactions.index', compact('transactions'));
     }
 
     public function create()
