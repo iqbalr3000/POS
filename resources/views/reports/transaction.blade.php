@@ -83,6 +83,7 @@
                                 <div class="col-auto">
                                     <button type="submit" class="btn btn-primary mb-3">Cari</button>
                                     <div class="btn btn-primary mb-3" onclick="print()" id="print">Print</div>
+                                    <a href="/reports/export_excel/transaction" class="btn btn-primary mb-3" target="_blank">Export Excel</a>
                                 </div>
                         </div>
                     </div>
@@ -111,7 +112,7 @@
                         <td>{{ $item->barang->nama_barang }}</td>
                         <td>{{ $item->id_user }}</td>
                         <td>{{ $item->jumlah_beli }}</td>
-                        <td>{{ $item->total_harga }}</td>
+                        <td>Rp. {{ $item->total_harga }}</td>
                         <td>{{ $item->tanggal_beli }}</td>
                     </tr>
                     @endforeach

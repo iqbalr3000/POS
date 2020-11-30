@@ -27,11 +27,11 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Name Distributor:</strong>
-                        <input type="text" name="nama_distributor" class="form-control" placeholder="Masukan nama merek">
+                        <input type="text" name="nama_distributor" class="form-control" placeholder="Masukan nama distributor">
                     </div>
                     <div class="form-group">
                         <strong>Alamat:</strong>
-                        <textarea type="text" name="alamat" class="form-control" placeholder="Masukan Alamat"></textarea>
+                        <textarea type="text" name="alamat" class="form-control" placeholder="Masukan alamat"></textarea>
                     </div>
                     <div class="form-group">
                         <strong>No Telepon:</strong>

@@ -82,6 +82,7 @@
                             <div class="col-auto">
                                 <button type="submit" class="btn btn-primary mb-3">Cari</button>
                                 <div class="btn btn-primary mb-3" onclick="print()" id="print">Print</div>
+                                <a href="/reports/export_excel/item" class="btn btn-primary mb-3" target="_blank">Export Excel</a>
                             </div>
                     </div>
                 </div>
@@ -108,7 +109,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $item->nama_barang }}</td>
                     <td>{{ $item->tanggal_masuk }}</td>
-                    <td>{{ $item->harga_barang }}</td>
+                    <td>Rp. {{ $item->harga_barang }}</td>
                     <td>{{ $item->stok_barang }}</td>
                     <td>{{ $item->merek->nama_merek }}</td>
                     <td>{{ $item->distributor->nama_distributor }}</td>

@@ -6,6 +6,12 @@ use Illuminate\Http\Request;
 use App\Models\Transaction;
 use App\Models\Item;
 
+use App\Exports\TransactionExport;
+use App\Exports\ItemExport;
+
+use Maatwebsite\Excel\Facades\Excel;
+use App\Http\Controllers\Controller;
+
 class ReportController extends Controller
 {
     public function index()
@@ -58,4 +64,14 @@ class ReportController extends Controller
  
         return view('reports.item', compact('barang', 'startDate', 'endDate'))->with('i', (request()->input('page', 1) - 1) * 5);;
     }
+
+    public function export_excel_transaction()
+	{
+		return Excel::download(new TransactionExport, 'Laporan Transaksi.xlsx');
+    }
+    
+    public function export_excel_item()
+	{
+		return Excel::download(new ItemExport, 'Laporan Barang.xlsx');
+	}
 }

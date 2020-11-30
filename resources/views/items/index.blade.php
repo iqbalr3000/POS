@@ -100,7 +100,7 @@
                             <td>{{ $item->id_merek }}</td>
                             <td>{{ $item->id_distributor }}</td>
                             <td>{{ $item->tanggal_masuk }}</td>
-                            <td>{{ $item->harga_barang }}</td>
+                            <td>Rp. {{ $item->harga_barang }}</td>
                             <td>{{ $item->stok_barang }}</td>
                             <td>{{ $item->keterangan }}</td>
                             <td>

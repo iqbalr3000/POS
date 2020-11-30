@@ -45,4 +45,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/laporan/cari', [ReportController::class, 'cari'])->name('reports.cari');
     Route::get('/laporan/search', [ReportController::class, 'search'])->name('reports.search');
 
+
+    Route::get('/reports/export_excel/transaction',  [ReportController::class, 'export_excel_transaction']);
+    Route::get('/reports/export_excel/item',  [ReportController::class, 'export_excel_item']);
+
 });

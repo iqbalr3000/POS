@@ -89,7 +89,7 @@
                             <td>{{ $transaction->id_barang }}</td>
                             <td>{{ $transaction->id_user }}</td>
                             <td>{{ $transaction->jumlah_beli }}</td>
-                            <td>{{ $transaction->total_harga }}</td>
+                            <td>Rp. {{ $transaction->total_harga }}</td>
                             <td>{{ $transaction->tanggal_beli }}</td>
                             <td>
                                 <form action="{{ route('transactions.destroy',$transaction->id) }}" method="POST">
