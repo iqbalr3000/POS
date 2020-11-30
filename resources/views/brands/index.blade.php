@@ -63,7 +63,6 @@
                     <li class="breadcrumb-item active">Merek</li>
                 </ol>
             
-                <br>
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
             
@@ -84,6 +83,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Merek</th>
                             <th>Nama Merek</th>
                             <th width="120px">Action</th>
                         </tr>
@@ -92,6 +92,7 @@
                     <tbody>
                         @foreach ($brands as $brand)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $brand->id }}</td>
                             <td>{{ $brand->nama_merek }}</td>
                             <td>

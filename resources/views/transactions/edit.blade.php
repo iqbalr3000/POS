@@ -8,7 +8,7 @@
             <li class="breadcrumb-item">Transaksi</li>
             <li class="breadcrumb-item active">Edit Transaksi</li>
         </ol>
-        <br>
+
         @if ($errors->any())
         <div class="alert alert-danger">
             <strong>Whoops!</strong> There were some problems with your input.<br><br>
@@ -20,55 +20,46 @@
         </div>
         @endif
     
-        <form action="{{ route('items.update',$item->id) }}" method="POST">
+        <form action="{{ route('transactions.update',$transaction->id) }}" method="POST">
             @csrf
             @method('PUT')
-    
               
                 <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <strong>ID Merek:</strong>
-                            <select class="form-control">
-                                <option value=''>Pilih ID Merek</option>
-                                @foreach ($brands as $brand)
-                                    <option value="{{ $brand->id }}"@if($brand->id == $item->id_merek) selected @endif>
-                                        {{ $brand->nama_merek }}
-                                    </option>
-                                @endforeach
-                            </select>
-                        </div>
+                    <div class="form-group">
+                        <strong>ID Barang:</strong>
+                        <select class="form-control" name="id_barang" id="id_barang">
+                            <option value disable>Pilih ID Barang</option>
+                            @foreach ($data as $item)
+                                <option value="{{ $item->id }}"@if($item->id == $transaction->id_barang) selected @endif data-harga="{{$item->harga_barang}}" data-stok="{{$item->stok_barang}}">
+                                    {{ $item->nama_barang }}
+                                </option>
+                            @endforeach
+                        </select>
                     </div>
                 </div>
 
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>ID User:</strong>
-                        <input type="date" name="id_user" value="{{ $transaction->id_user }}" class="form-control" placeholder="Masukan id user">
-                    </div>
-                </div>
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Harga Barang:</strong>
-                        <input type="text" name="harga_barang" value="{{ $transaction->harga_barang }}" class="form-control" placeholder="Masukan harga barang">
+                        <input type="text" name="id_user" id="id_user" value="{{ $transaction->id_user }}" class="form-control" placeholder="Masukan id user" readonly>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Jumlah Beli:</strong>
-                        <input type="text" name="stok_barang" value="{{ $transaction->jumlah_beli }}" class="form-control" placeholder="Masukan jumlah beli">
+                        <input type="number" name="jumlah_beli" id="jumlah_beli" value="{{ $transaction->jumlah_beli }}" class="form-control" placeholder="Masukan jumlah beli">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Total Harga:</strong>
-                        <input type="text" name="total_harga" value="{{ $transaction->total_harga }}" class="form-control" placeholder="Masukan total harga">
+                    <input type="number" name="total_harga" id="total_harga" value="{{ $transaction->total_harga }}" class="form-control" placeholder="Masukan total harga" readonly>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Tanggal Beli:</strong>
-                        <input type="date" name="tanggal_beli" value="{{ $transaction->tanggal_beli }}" class="form-control" placeholder="Masukan tanggal beli">
+                        <input type="date" name="tanggal_beli" id="tanggal_beli" value="{{ $transaction->tanggal_beli }}" class="form-control" placeholder="Masukan tanggal beli">
                     </div>
                 </div>
                 
@@ -81,5 +72,38 @@
             </div>
     
         </form>
+
+        <script>
+            jQuery(document).ready(function(){
+            
+                jQuery('select').change(function(){
+                  let harga = jQuery(this).find(':selected').data('harga');
+                  let stok = jQuery(this).find(':selected').data('stok');
+            
+                  jQuery('#jumlah_beli').keyup(function(){
+                      let jumlah_beli = jQuery('#jumlah_beli').val()
+                      if(jumlah_beli > stok){
+                        jQuery('#jumlah_beli').val();
+                        alert('Stok Tidak Mencukupi');
+                      }else{
+                        let total = parseInt(harga) * parseInt(jumlah_beli)
+            
+                        if (harga == "kosong") {
+                            total = ""
+                        }
+            
+                        if (jumlah_beli == "") {
+                            total = ""
+                        }
+            
+                        console.log(total);
+                        if(!isNaN(total)){
+                            jQuery('#total_harga').val(total)
+                        }
+                      }
+                  })
+              })
+            });
+        </script>
       
 @endsection

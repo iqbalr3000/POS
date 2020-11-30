@@ -8,7 +8,6 @@
             <li class="breadcrumb-item">Merek</li>
             <li class="breadcrumb-item active">Buat Merek</li>
         </ol>
-        <br>
 
         @if ($errors->any())
             <div class="alert alert-danger">

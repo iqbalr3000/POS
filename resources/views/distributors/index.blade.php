@@ -62,7 +62,6 @@
                     <li class="breadcrumb-item active">Distributor</li>
                 </ol>
 
-                <br>
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
 
@@ -83,6 +82,7 @@
                     <thead>
                         <tr>
                             <th>No</th>
+                            <th>ID Distributor</th>
                             <th>Nama Distributor</th>
                             <th>Alamat</th>
                             <th>No. Telepon</th>
@@ -92,6 +92,7 @@
                     <tbody>
                         @foreach ($distributors as $distributor)
                         <tr>
+                            <td>{{ $loop->iteration }}</td>
                             <td>{{ $distributor->id }}</td>
                             <td>{{ $distributor->nama_distributor }}</td>
                             <td>{{ $distributor->alamat }}</td>

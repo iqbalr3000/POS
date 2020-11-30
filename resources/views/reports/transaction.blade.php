@@ -59,7 +59,6 @@
                     <li class="breadcrumb-item">Laporan</li>
                     <li class="breadcrumb-item active">Laporan Transaksi</li>
                 </ol>
-                <br>
 
                 <div class="row">
                     <div class="col-12 col-md-12 col-lg-12">

@@ -7,7 +7,6 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
-use App\Models\Transaction;
 
 /*
 |--------------------------------------------------------------------------
@@ -45,7 +44,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/laporan/cari', [ReportController::class, 'cari'])->name('reports.cari');
     Route::get('/laporan/search', [ReportController::class, 'search'])->name('reports.search');
 
-
+    //report excel
     Route::get('/reports/export_excel/transaction',  [ReportController::class, 'export_excel_transaction']);
     Route::get('/reports/export_excel/item',  [ReportController::class, 'export_excel_item']);
 

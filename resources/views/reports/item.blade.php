@@ -59,37 +59,36 @@
                     <li class="breadcrumb-item">Laporan</li>
                     <li class="breadcrumb-item active">Laporan Barang</li>
                 </ol>
-                <br>
 
-            <div class="row">
-                <div class="col-12 col-md-12 col-lg-12">
-                        <form action="/laporan/search" method="GET">
-                        <div class="form-row align-items-center">
-                            <div class="col-auto">
-                                <input type="date" class="form-control @error('startDate') is-invalid @enderror mb-3" name="startDate" id="startDate">
-                                @error('starDate')
+                <div class="row">
+                    <div class="col-12 col-md-12 col-lg-12">
+                            <form action="/laporan/search" method="GET">
+                            <div class="form-row align-items-center">
+                                <div class="col-auto">
+                                    <input type="date" class="form-control @error('startDate') is-invalid @enderror mb-3" name="startDate" id="startDate">
+                                    @error('starDate')
+                                        <div class="invalid-feedback">{{$message}}</div>
+                                        @enderror
+                                </div>
+                                <div class="col-auto">
+                                    <label class="col-sm-2 mb-3"><b>-</b></label>
+                                </div>
+                                <div class="col-auto">
+                                    <input type="date" class="form-control @error('endDate') is-invalid @enderror mb-3" name="endDate" id="endDate">
+                                    @error('endDate')
                                     <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                            </div>
-                            <div class="col-auto">
-                                <label class="col-sm-2 mb-3"><b>-</b></label>
-                            </div>
-                            <div class="col-auto">
-                                <input type="date" class="form-control @error('endDate') is-invalid @enderror mb-3" name="endDate" id="endDate">
-                                @error('endDate')
-                                <div class="invalid-feedback">{{$message}}</div>
-                                    @enderror
-                            </div>
-                            <div class="col-auto">
-                                <button type="submit" class="btn btn-primary mb-3">Cari</button>
-                                <div class="btn btn-primary mb-3" onclick="print()" id="print">Print</div>
-                                <a href="/reports/export_excel/item" class="btn btn-primary mb-3" target="_blank">Export Excel</a>
-                            </div>
+                                        @enderror
+                                </div>
+                                <div class="col-auto">
+                                    <button type="submit" class="btn btn-primary mb-3">Cari</button>
+                                    <div class="btn btn-primary mb-3" onclick="print()" id="print">Print</div>
+                                    <a href="/reports/export_excel/item" class="btn btn-primary mb-3" target="_blank">Export Excel</a>
+                                </div>
+                        </div>
                     </div>
+                    <hr>
                 </div>
-                <hr>
-            </div>
-        </form>
+            </form>
         <div class="card">
             <div class="card-body">
             <table id="table" class="table table-striped table-bordered table-md">

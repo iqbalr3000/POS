@@ -8,7 +8,6 @@
             <li class="breadcrumb-item">Distributor</li>
             <li class="breadcrumb-item active">Edit Distributor</li>
         </ol>
-        <br>
         
         @if ($errors->any())
         <div class="alert alert-danger">

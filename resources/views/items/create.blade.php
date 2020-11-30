@@ -8,7 +8,7 @@
             <li class="breadcrumb-item">Barang</li>
             <li class="breadcrumb-item active">Buat Barang</li>
         </ol>
-        <br>
+
         @if ($errors->any())
             <div class="alert alert-danger">
                 <strong>Whoops!</strong> There were some problems with your input.<br><br>

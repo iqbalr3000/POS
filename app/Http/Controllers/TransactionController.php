@@ -53,7 +53,9 @@ class TransactionController extends Controller
 
     public function edit(Transaction $transaction)
     {
-        return view('transactions.index', compact('transaction'));
+        $data  = Item::where('stok_barang', '>', 0)->get();
+        
+        return view('transactions.edit', compact('transaction', 'data'));
     }
 
     public function update(Request $request, Transaction $transaction)
@@ -69,7 +71,7 @@ class TransactionController extends Controller
         $transaction->update($request->all());
 
         return redirect()->route('transactions.index')
-                        ->with('success','Transaksi created successfully.');
+                        ->with('success','Transaksi updated successfully.');
     }
 
     public function destroy(Transaction $transaction)
@@ -77,7 +79,7 @@ class TransactionController extends Controller
         $transaction->delete();
 
         return redirect()->route('transactions.index')
-                        ->with('success','Transaksi created successfully.');
+                        ->with('success','Transaksi deleted successfully.');
     }
 
 
