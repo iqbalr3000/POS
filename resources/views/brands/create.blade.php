@@ -2,6 +2,7 @@
 
 @section('content')
         <h1 class="mt-4">Merek</h1>
+        <br>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item">Home</li>
             <li class="breadcrumb-item">Merek</li>

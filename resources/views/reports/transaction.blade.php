@@ -53,6 +53,7 @@
         <div class="container">
             <main class="py-4">
                 <h1 class="mt-4">Laporan</h1>
+                <br>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Home</li>
                     <li class="breadcrumb-item">Laporan</li>
@@ -96,12 +97,12 @@
                 <thead>
                     <tr>
                         <th>No</th>        
-                        <th>Kode Transaksi</th>
+                        <th>ID Transaksi</th>
                         <th>Nama Barang</th>
-                        <th>Nama User</th>
+                        <th>ID User</th>
                         <th>Jumlah Beli</th>
                         <th>Total Harga</th>
-                           <th>Tanggal Beli</th>
+                        <th>Tanggal Beli</th>
                     </tr>
                 </thead> 
                 <tbody>
