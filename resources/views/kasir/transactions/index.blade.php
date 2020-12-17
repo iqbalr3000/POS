@@ -15,16 +15,17 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+    
     {{-- data table --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
     <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
-    
+
 </head>
 <body>
     <div id="app">
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <a class="navbar-brand" href="#">Aplikasi POS</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -34,16 +35,10 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/brands">Merek</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="/distributors">Distributor</a>
+                        <a class="nav-link" href="/dashboard_kasir">Home</a>
                     </li>
                     <li class="nav-item active">
-                        <a class="nav-link" href="/items">Barang <span class="sr-only">(current)</span></a>
+                        <a class="nav-link" href="/transactions">Transaksi <span class="sr-only">(current)</span></a>
                     </li>
                 </ul>
 
@@ -52,21 +47,22 @@
                     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Keluar</button>
                 </form>
             </div>
-          </nav>
+        </nav>
+
         <div class="container">
             <main class="py-4">
-                <h1 class="mt-4">Barang</h1>
+                <h1 class="mt-4">Transaksi</h1>
                 <br>
                 <ol class="breadcrumb mb-4">
                     <li class="breadcrumb-item">Home</li>
-                    <li class="breadcrumb-item active">Barang</li>
+                    <li class="breadcrumb-item active">Transaksi</li>
                 </ol>
 
                 <div class="row">
                     <div class="col-lg-12 margin-tb">
 
                         <div class="pull-right">
-                            <a class="btn btn-primary" href="{{ route('items.create') }}"> Buat barang baru</a>
+                            <a class="btn btn-primary" href="{{ route('transactions.create') }}"> Buat transaksi baru</a>
                         </div>
                         <br>
                     </div>
@@ -82,33 +78,30 @@
                     <thead>
                         <tr>
                             <th>NO</th>
+                            <th>ID Transaksi</th>
                             <th>ID Barang</th>
-                            <th>Nama Barang</th>
-                            <th>ID Merek</th>
-                            <th>ID Distributor</th>
-                            <th>Tanggal Masuk</th>
-                            <th>Harga Barang</th>
-                            <th>Stok Barang</th>
-                            <th>Keterangan</th>
+                            <th>ID User</th>
+                            <th>Jumlah Beli</th>
+                            <th>Total Harga</th>
+                            <th>Tanggal Beli</th>
+                          
                             <th width="120px">Action</th>
                         </tr>
-                    </thead>     
+                    </thead>    
                     <tbody>
-                        @foreach ($items as $item)
+                        @foreach ($transactions as $transaction)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $item->id }}</td>
-                            <td>{{ $item->nama_barang }}</td>
-                            <td>{{ $item->id_merek }}</td>
-                            <td>{{ $item->id_distributor }}</td>
-                            <td>{{ $item->tanggal_masuk }}</td>
-                            <td>Rp. {{ $item->harga_barang }}</td>
-                            <td>{{ $item->stok_barang }}</td>
-                            <td>{{ $item->keterangan }}</td>
+                            <td>{{ $transaction->id }}</td>
+                            <td>{{ $transaction->id_barang }}</td>
+                            <td>{{ $transaction->id_user }}</td>
+                            <td>{{ $transaction->jumlah_beli }}</td>
+                            <td>Rp. {{ $transaction->total_harga }}</td>
+                            <td>{{ $transaction->tanggal_beli }}</td>
                             <td>
-                                <form action="{{ route('items.destroy',$item->id) }}" method="POST">
+                                <form action="{{ route('transactions.destroy',$transaction->id) }}" method="POST">
                                     
-                                    <a class="btn btn-primary" href="{{ route('items.edit',$item->id) }}">
+                                    <a class="btn btn-primary" href="{{ route('transactions.edit',$transaction->id) }}">
                                         <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-pencil" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                             <path fill-rule="evenodd" d="M12.146.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1 0 .708l-10 10a.5.5 0 0 1-.168.11l-5 2a.5.5 0 0 1-.65-.65l2-5a.5.5 0 0 1 .11-.168l10-10zM11.207 2.5L13.5 4.793 14.793 3.5 12.5 1.207 11.207 2.5zm1.586 3L10.5 3.207 4 9.707V10h.5a.5.5 0 0 1 .5.5v.5h.5a.5.5 0 0 1 .5.5v.5h.293l6.5-6.5zm-9.761 5.175l-.106.106-1.528 3.821 3.821-1.528.106-.106A.5.5 0 0 1 5 12.5V12h-.5a.5.5 0 0 1-.5-.5V11h-.5a.5.5 0 0 1-.468-.325z"/>
                                         </svg>
@@ -127,9 +120,9 @@
                             </td>
                         </tr>
                         @endforeach
-                    </tbody>    
+                    </tbody>     
                 </table>
-                
+
                 <script>
                     $(document).ready(function() {
                         $('#example').DataTable();

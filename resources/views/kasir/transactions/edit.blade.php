@@ -30,14 +30,13 @@
                         <select class="form-control" name="id_barang" id="id_barang">
                             <option value disable>Pilih ID Barang</option>
                             @foreach ($data as $item)
-                                <option value="{{ $item->id }}"@if($item->id == $transaction->id_barang) selected @endif data-harga="{{$item->harga_barang}}" data-stok="{{$item->stok_barang}}">
+                                <option value="{{ $item->id }}" @if($item->id == $transaction->id_barang) selected @endif data-harga="{{$item->harga_barang}}" data-stok="{{$item->stok_barang}}">
                                     {{ $item->nama_barang }}
                                 </option>
                             @endforeach
                         </select>
                     </div>
                 </div>
-
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>ID User:</strong>
@@ -47,13 +46,13 @@
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Jumlah Beli:</strong>
-                        <input type="number" name="jumlah_beli" id="jumlah_beli" value="{{ $transaction->jumlah_beli }}" class="form-control" placeholder="Masukan jumlah beli">
+                        <input type="number" name="jumlah_beli" id="jumlah_beli" class="form-control" placeholder="Masukan jumlah beli" value="{{ $transaction->jumlah_beli }}">
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">
                     <div class="form-group">
                         <strong>Total Harga:</strong>
-                    <input type="number" name="total_harga" id="total_harga" value="{{ $transaction->total_harga }}" class="form-control" placeholder="Masukan total harga" readonly>
+                    <input type="number" name="total_harga" id="total_harga" class="form-control" placeholder="Masukan total harga" value="{{ $transaction->total_harga }}" readonly>
                     </div>
                 </div>
                 <div class="col-xs-12 col-sm-12 col-md-12">

@@ -19,7 +19,8 @@ class CreateItemsTable extends Migration
             $table->integer('id_merek');
             $table->integer('id_distributor');
             $table->date('tanggal_masuk');
-            $table->integer('harga_barang');
+            $table->integer('harga_beli');
+            $table->integer('harga_jual');
             $table->integer('stok_barang');
             $table->text('keterangan');
             $table->timestamps();

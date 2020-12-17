@@ -13,7 +13,7 @@ class TransactionController extends Controller
     {
         $transactions = Transaction::all();
            
-        return view('transactions.index', compact('transactions'));
+        return view('kasir.transactions.index', compact('transactions'));
     }
 
     public function create()
@@ -22,7 +22,7 @@ class TransactionController extends Controller
         $data  = Item::where('stok_barang', '>', 0)->get();
         $transaction = Transaction::all();
 
-        return view('transactions.create', compact('data', 'user', 'transaction'));
+        return view('kasir.transactions.create', compact('data', 'user', 'transaction'));
     }
 
     public function store(Request $request)
@@ -55,7 +55,7 @@ class TransactionController extends Controller
     {
         $data  = Item::where('stok_barang', '>', 0)->get();
         
-        return view('transactions.edit', compact('transaction', 'data'));
+        return view('kasir.transactions.edit', compact('transaction', 'data'));
     }
 
     public function update(Request $request, Transaction $transaction)

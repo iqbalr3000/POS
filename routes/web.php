@@ -7,6 +7,7 @@ use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
 |--------------------------------------------------------------------------
@@ -30,6 +31,17 @@ Route::group(['middleware' => ['auth']], function () {
 
     Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
       
+    // Dashboard
+    Route::get('/dashboard_admin', function () {
+        return view('admin.dashboard');
+    })->name('admin.dashboard');
+    Route::get('/dashboard_kasir', function () {
+        return view('kasir.dashboard');
+    })->name('kasir.dashboard');
+    Route::get('/dashboard_manager', function () {
+        return view('manager.dashboard');
+    })->name('manager.dashboard');
+
     //admin
     Route::resource('/brands', BrandController::class);
     Route::resource('/distributors', DistributorController::class);

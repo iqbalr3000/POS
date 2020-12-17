@@ -18,9 +18,11 @@
 
     {{-- data table --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link  href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
+
 
 </head>
 <body>
@@ -34,7 +36,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="/dashboard_manager">Home</a>
                     </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="/reportsTransaction">Laporan Transaksi <span class="sr-only">(current)</span></a>
@@ -49,7 +51,7 @@
                     <button class="btn btn-outline-danger my-2 my-sm-0" type="submit">Keluar</button>
                 </form>
             </div>
-          </nav>
+        </nav>
         <div class="container">
             <main class="py-4">
                 <h1 class="mt-4">Laporan</h1>
@@ -92,34 +94,40 @@
             </form>
             <div class="card">
                 <div class="card-body">
-                <table id="table" class="table table-striped table-bordered table-md">
-                <thead>
-                    <tr>
-                        <th>No</th>        
-                        <th>ID Transaksi</th>
-                        <th>Nama Barang</th>
-                        <th>ID User</th>
-                        <th>Jumlah Beli</th>
-                        <th>Total Harga</th>
-                        <th>Tanggal Beli</th>
-                    </tr>
-                </thead> 
-                <tbody>
-                    @foreach ($transaction as $item)
-                    <tr>
-                        <td>{{ $loop->iteration }}</td>
-                        <td>{{ $item->id }}</td>
-                        <td>{{ $item->barang->nama_barang }}</td>
-                        <td>{{ $item->id_user }}</td>
-                        <td>{{ $item->jumlah_beli }}</td>
-                        <td>Rp. {{ $item->total_harga }}</td>
-                        <td>{{ $item->tanggal_beli }}</td>
-                    </tr>
-                    @endforeach
-                </tbody>
+                    <table class="table table-striped" id="example">
+                    <thead>
+                        <tr>
+                            <th>No</th>        
+                            <th>ID Transaksi</th>
+                            <th>Nama Barang</th>
+                            <th>Nama Kasir</th>
+                            <th>Jumlah Beli</th>
+                            <th>Total Harga</th>
+                            <th>Tanggal Beli</th>
+                        </tr>
+                    </thead> 
+                    <tbody>
+                        @foreach ($transaction as $item)
+                        <tr>
+                            <td>{{ $loop->iteration }}</td>
+                            <td>{{ $item->id }}</td>
+                            <td>{{ $item->barang->nama_barang }}</td>
+                            <td>{{ $item->user->id_user }}</td>
+                            <td>{{ $item->jumlah_beli }}</td>
+                            <td>Rp. {{ $item->total_harga }}</td>
+                            <td>{{ $item->tanggal_beli }}</td>
+                        </tr>
+                        @endforeach
+                    </tbody>
                 </table>
             </div>
             
+            <script>
+                $(document).ready(function() {
+                    $('#example').DataTable();
+                } );
+            </script>
+
             </main>
         </div>
     </div>

@@ -18,9 +18,10 @@
 
     {{-- data table --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
+
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link  href="https://cdn.datatables.net/1.10.21/css/jquery.dataTables.min.css" rel="stylesheet">
-    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <link  href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet">
+    <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
 
 </head>
 <body>
@@ -34,7 +35,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="/dashboard_manager">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/reportsTransaction">Laporan Transaksi</a>
@@ -84,45 +85,56 @@
                                     <div class="btn btn-primary mb-3" onclick="print()" id="print">Print</div>
                                     <a href="/reports/export_excel/item" class="btn btn-primary mb-3" target="_blank">Export Excel</a>
                                 </div>
+                            </div>
                         </div>
+                        <hr>
                     </div>
-                    <hr>
+                </form>
+
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table table-striped" id="example">
+                        <thead>
+                            <tr>
+                                <th>No</th>        
+                                <th>Nama Barang</th>
+                                <th>Tanggal Masuk</th>
+                                <th>Harga Beli</th>
+                                <th>Harga Jual</th>
+                                <th>Stok Barang</th>
+                                <th>Nama Merek</th>
+                                <th>Nama Distributor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($barang as $item)
+                            <tr>
+                                <td>{{ $loop->iteration }}</td>
+                                <td>{{ $item->nama_barang }}</td>
+                                <td>{{ $item->tanggal_masuk }}</td>
+                                <td>Rp. {{ $item->harga_beli }}</td>
+                                <td>Rp. {{ $item->harga_jual }}</td>
+                                <td>{{ $item->stok_barang }}</td>
+                                <td>{{ $item->merek->nama_merek }}</td>
+                                <td>{{ $item->distributor->nama_distributor }}</td>
+                            </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
                 </div>
-            </form>
-        <div class="card">
-            <div class="card-body">
-            <table id="table" class="table table-striped table-bordered table-md">
-            <thead>
-                <tr>
-                    <th>No</th>        
-                    <th>Nama Barang</th>
-                    <th>Tanggal Masuk</th>
-                    <th>Harga Barang</th>
-                    <th>Stok Barang</th>
-                    <th>Nama Merek</th>
-                    <th>Nama Distributor</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($barang as $item)
-                <tr>
-                    <td>{{ $loop->iteration }}</td>
-                    <td>{{ $item->nama_barang }}</td>
-                    <td>{{ $item->tanggal_masuk }}</td>
-                    <td>Rp. {{ $item->harga_barang }}</td>
-                    <td>{{ $item->stok_barang }}</td>
-                    <td>{{ $item->merek->nama_merek }}</td>
-                    <td>{{ $item->distributor->nama_distributor }}</td>
-                </tr>
-                @endforeach
-            </tbody>
-            </table>
-        </div>
-        <script>
-            function.print(){
-                window.print();
-            }
-         </script>
+
+                <script>
+                    $(document).ready(function() {
+                        $('#example').DataTable();
+                    } );
+                </script>
+
+                <script>
+                    function.print(){
+                        window.print();
+                    }
+                </script>
+
             </main>
         </div>
     </div>

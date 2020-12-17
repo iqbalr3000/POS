@@ -10,6 +10,7 @@ use App\Exports\TransactionExport;
 use App\Exports\ItemExport;
 
 use Maatwebsite\Excel\Facades\Excel;
+
 use App\Http\Controllers\Controller;
 
 class ReportController extends Controller
@@ -18,7 +19,7 @@ class ReportController extends Controller
     {
         $transaction = Transaction::latest()->paginate(5);
  
-        return view('reports.transaction',compact('transaction'))
+        return view('manager.reports.transaction',compact('transaction'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -26,7 +27,7 @@ class ReportController extends Controller
     {
         $barang = Item::latest()->paginate(5);
 
-        return view('reports.item',compact('barang'))
+        return view('manager.reports.item',compact('barang'))
             ->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
@@ -45,7 +46,7 @@ class ReportController extends Controller
  
         $transaction = Transaction::whereBetween('tanggal_beli', [$startDate,$endDate])->latest()->paginate(5);
  
-        return view('reports.transaction', compact('transaction', 'startDate', 'endDate'))->with('i', (request()->input('page', 1) - 1) * 5);;
+        return view('manager.reports.transaction', compact('transaction', 'startDate', 'endDate'))->with('i', (request()->input('page', 1) - 1) * 5);;
     }
 
     public function search(Request $request)
@@ -62,7 +63,7 @@ class ReportController extends Controller
  
         $barang = Item::whereBetween('tanggal_masuk', [$startDate,$endDate])->latest()->paginate(5);
  
-        return view('reports.item', compact('barang', 'startDate', 'endDate'))->with('i', (request()->input('page', 1) - 1) * 5);;
+        return view('manager.reports.item', compact('barang', 'startDate', 'endDate'))->with('i', (request()->input('page', 1) - 1) * 5);;
     }
 
     public function export_excel_transaction()

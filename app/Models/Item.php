@@ -10,7 +10,7 @@ class Item extends Model
     use HasFactory;
 
     protected $fillable = [
-        'nama_barang', 'id_merek', 'id_distributor', 'tanggal_masuk', 'harga_barang', 'stok_barang', 'keterangan'
+        'nama_barang', 'id_merek', 'id_distributor', 'tanggal_masuk', 'harga_beli', 'harga_jual', 'stok_barang', 'keterangan'
     ];
 
     public function merek()

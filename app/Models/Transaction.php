@@ -17,4 +17,9 @@ class Transaction extends Model
     {
         return $this->belongsTo('App\Models\Item' , 'id_barang');
     }
+
+    public function user()
+    {
+        return $this->belongsTo('App\Models\User' , 'id_user');
+    }
 }

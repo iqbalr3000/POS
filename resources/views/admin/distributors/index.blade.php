@@ -15,6 +15,9 @@
 
     <!-- Styles -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
+ 
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 
     {{-- data table --}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" >
@@ -34,7 +37,7 @@
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/home">Home</a>
+                        <a class="nav-link" href="/dashboard_admin">Home</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/brands">Merek</a>
@@ -66,12 +69,52 @@
                     <div class="col-lg-12 margin-tb">
 
                         <div class="pull-right">
-                            <a class="btn btn-primary" href="{{ route('distributors.create') }}"> Buat distributor baru</a>
+                            <a class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"> Buat distributor baru</a>
                         </div>
                         <br>
                     </div>
                 </div>
             
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Add Disributor</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="{{ route('distributors.store') }}" method="POST">
+                                @csrf
+                            
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12">
+                                        <div class="form-group">
+                                            <strong>Distributor Name:</strong>
+                                            <input type="text" class="form-control" name="nama_distributor" placeholder="Input distributor name">
+                                        </div>
+                                        <div class="form-group">
+                                            <strong>Address:</strong>
+                                            <textarea type="text" class="form-control" name="alamat" placeholder="Input address"></textarea>
+                                        </div>
+                                        <div class="form-group">
+                                            <strong>No Telepon:</strong>
+                                            <input type="text" class="form-control" name="no_telp" placeholder="Input no telepon">
+                                        </div>
+                                    </div>
+                                </div>
+                        </div>
+                        <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </form>
+                        </div>
+                    </div>
+                    </div>
+                </div>
+                
                 @if ($message = Session::get('success'))
                     <div class="alert alert-success">
                         <p>{{ $message }}</p>

@@ -13,15 +13,10 @@ class ItemController extends Controller
     {
         $items = Item::all();
 
-        return view('items.index', compact('items'));
-    }
-
-    public function create()
-    {
         $brands = Brand::all();
         $distributors = Distributor::all();
 
-        return view('items.create', compact('brands', 'distributors'));
+        return view('admin.items.index', compact('items', 'brands', 'distributors'));
     }
 
 
@@ -32,7 +27,8 @@ class ItemController extends Controller
             'id_merek' => 'required',
             'id_distributor' => 'required',
             'tanggal_masuk' => 'required',
-            'harga_barang' => 'required',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
             'stok_barang' => 'required',
             'keterangan' => 'required',
         ]);
@@ -49,7 +45,7 @@ class ItemController extends Controller
         $brands = Brand::all();
         $distributors = Distributor::all();
 
-        return view('items.edit',compact('item', 'brands', 'distributors'));
+        return view('admin.items.edit',compact('item', 'brands', 'distributors'));
 
     }
 
@@ -61,7 +57,8 @@ class ItemController extends Controller
             'id_merek' => 'required',
             'id_distributor' => 'required',
             'tanggal_masuk' => 'required',
-            'harga_barang' => 'required',
+            'harga_beli' => 'required',
+            'harga_jual' => 'required',
             'stok_barang' => 'required',
             'keterangan' => 'required',
         ]);
