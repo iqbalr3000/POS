@@ -11,38 +11,30 @@ class TransactionController extends Controller
 {
     public function index()
     {
-        $transactions = Transaction::all();
-           
-        return view('kasir.transactions.index', compact('transactions'));
-    }
-
-    public function create()
-    {
-        $user = Auth::id();
+        $transactions = Transaction::all()->where('status', '=', 'Belum Bayar');
         $data  = Item::where('stok_barang', '>', 0)->get();
-        $transaction = Transaction::all();
 
-        return view('kasir.transactions.create', compact('data', 'user', 'transaction'));
+        $total = Transaction::all()->where('status', '=', 'Belum Bayar')->sum('total_harga');
+
+        return view('kasir.transactions.index', compact('transactions', 'data', 'total'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'id_barang' => 'required',
-            'id_user' => 'required',
             'jumlah_beli' => 'required',
-            'total_harga' => 'required',
-            'tanggal_beli' => 'required',
+            'status' => 'required',
         ]);
 
         $data = Item::find($request->id_barang);
-        $total_harga = $request->jumlah_beli * $data->harga_barang;
+            $total_harga = $request->jumlah_beli * $data->harga_jual;
 
-        $sisa_stok = $data->stok_barang - $request->jumlah_beli;
-        
-        $data->update([
-            'stok_barang' => $sisa_stok
-        ]);
+            $sisa_stok = $data->stok_barang - $request->jumlah_beli;
+            
+            $data->update([
+                'stok_barang' => $sisa_stok
+            ]);
 
         Transaction::create($request->all());
 
@@ -74,9 +66,17 @@ class TransactionController extends Controller
                         ->with('success','Transaksi updated successfully.');
     }
 
-    public function destroy(Transaction $transaction)
+    public function destroy(Request $request, Transaction $transaction)
     {
         $transaction->delete();
+
+        $data = Item::find($request->id_barang);
+
+            $sisa_stok = $data->stok_barang + $request->jumlah_beli;
+            
+            $data->update([
+                'stok_barang' => $sisa_stok
+            ]);
 
         return redirect()->route('transactions.index')
                         ->with('success','Transaksi deleted successfully.');

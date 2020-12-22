@@ -10,16 +10,11 @@ class Transaction extends Model
     use HasFactory;
 
     protected $fillable = [
-        'id_barang', 'id_user', 'jumlah_beli', 'total_harga', 'tanggal_beli'
+        'id_barang', 'jumlah_beli', 'total_harga', 'status'
     ];
 
     public function barang()
     {
         return $this->belongsTo('App\Models\Item' , 'id_barang');
-    }
-
-    public function user()
-    {
-        return $this->belongsTo('App\Models\User' , 'id_user');
     }
 }
