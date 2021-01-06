@@ -3,10 +3,12 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\BrandController;
+use App\Http\Controllers\DetailTransactionController;
 use App\Http\Controllers\DistributorController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\ReportController;
+use App\Models\DetailTransaction;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 /*
@@ -49,6 +51,7 @@ Route::group(['middleware' => ['auth']], function () {
 
     //kasir
     Route::resource('/transactions', TransactionController::class);
+    Route::post('/transactions/bayar', [DetailTransactionController::class, 'store'])->name('bayar');
 
     //manager
     Route::get('/reportsTransaction', [ReportController::class, 'index'])->name('reports.transaction');

@@ -88,7 +88,7 @@
                                 <div class="col-xs-12 col-sm-12 col-md-12">
                                     <div class="form-group">
                                         <strong>ID Barang:</strong>
-                                        <select class="form-control" name="id_barang" id="id_barang">
+                                        <select class="form-control"  name="id_barang" id="id_barang" searchable="Search here..">
                                             <option value disable>Pilih ID Barang</option>
                                             @foreach ($data as $item)
                                                 <option value="{{ $item->id }}" data-harga="{{$item->harga_jual}}" data-stok="{{$item->stok_barang}}">
@@ -155,7 +155,7 @@
                         @foreach ($transactions as $transaction)
                         <tr>
                             <td>{{ $loop->iteration }}</td>
-                            <td>{{ $transaction->id_barang }}</td>
+                            <td>{{ $transaction->barang->nama_barang }}</td>
                             <td>{{ $transaction->jumlah_beli }}</td>
                             <td>Rp. {{ $transaction->total_harga }}</td>
                             <td>
@@ -200,8 +200,18 @@
                         </button>
                         </div>
                         <div class="modal-body">
-                            <form action="{{ route('transactions.store') }}" method="POST">
+                            <form action="{{ route('bayar') }}" method="POST">
                                 @csrf
+
+                                <div class="form-group">
+                                    <input type="text" name="id_user" id="id_user" class="form-control" placeholder="Masukan ID User" value="{{ $user }}" hidden>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="tanggal_beli">Tanggal Beli</label>
+                                    <input type="date" name="tanggal_beli" id="tanggal_beli" class="form-control" placeholder="Masukan tanggal beli" value="">
+                                </div>
+
                                 <div class="form-group">
                                     <label for="total_bayar">Total Bayar</label>
                                     <div class="input-group mb-2">
@@ -225,7 +235,7 @@
                                         <div class="input-group-prepend">
                                             <div class="input-group-text">Rp.</div>
                                         </div>
-                                        <input type="number" class="form-control" id="kembalian" name="kembalian" readonly>
+                                        <input type="number" class="form-control" id="kembalian" name="kembalian" placeholder="Kembalian" readonly>
                                     </div>
                                 </div>
                         </div>
@@ -280,16 +290,30 @@
                 </script>
 
                 <script>
-                    jQuery(document).ready(function(){
-                        let total = jQuery('#total_bayar').val()
-                        let bayar = jQuery('#uang_bayar').val()
+                    jQuery(document).ready(function() {
+                        jQuery("#total_bayar, #uang_bayar").keyup(function(){
+                            let total_bayar  = $("#total_bayar").val()
+                            let uang_bayar = $("#uang_bayar").val()
 
-                        let kembalian = parseInt(bayar) - parseInt(total)
-                
+                            let kembalian = parseInt(uang_bayar) - parseInt(total_bayar);
+
+                            if (uang_bayar == "") {
+                                kembalian = ""
+                            }
+
                             console.log(kembalian);
                             if(!isNaN(kembalian)){
-                                jQuery('#kembalian').val(kembalian);
+
+                                jQuery("#kembalian").val(kembalian);
                             }
+                        });
+                    });
+                </script>
+
+                <script>
+                    // Material Select Initialization
+                    $(document).ready(function() {
+                    $('.mdb-select').materialSelect();
                     });
                 </script>
 
