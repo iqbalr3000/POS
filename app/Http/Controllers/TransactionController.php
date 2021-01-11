@@ -30,7 +30,6 @@ class TransactionController extends Controller
         ]);
 
         $data = Item::find($request->id_barang);
-            $total_harga = $request->jumlah_beli * $data->harga_jual;
 
             $sisa_stok = $data->stok_barang - $request->jumlah_beli;
             
@@ -44,17 +43,17 @@ class TransactionController extends Controller
                         ->with('success','Transaksi created successfully.');
     }
 
-    public function destroy(Request $request, Transaction $transaction)
+    public function destroy(Transaction $transaction)
     {
-        $transaction->delete();
 
-        $data = Item::find($request->id_barang);
-
-            $sisa_stok = $data->stok_barang + $request->jumlah_beli;
+        $data = Item::find($transaction->id_barang);
+            $sisa_stok = $data->stok_barang + $transaction->jumlah_beli;
             
             $data->update([
                 'stok_barang' => $sisa_stok
             ]);
+
+        $transaction->delete();
 
         return redirect()->route('transactions.index')
                         ->with('success','Transaksi deleted successfully.');

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Transaction;
+use App\Models\DetailTransaction;
 use App\Models\Item;
 
 use App\Exports\TransactionExport;
@@ -17,7 +18,7 @@ class ReportController extends Controller
 {
     public function index()
     {
-        $transaction = Transaction::latest()->paginate(5);
+        $transaction = DetailTransaction::latest()->paginate(5);
  
         return view('manager.reports.transaction',compact('transaction'))
             ->with('i', (request()->input('page', 1) - 1) * 5);

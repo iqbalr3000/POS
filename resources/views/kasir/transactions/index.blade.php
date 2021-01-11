@@ -41,8 +41,7 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="#" class="brand-link">
-                <img src="dist/img/Avatar.png" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">POS</span>
+                <span class="brand-text font-weight-light">POINT OF SALES</span>
             </a>
 
             <div class="sidebar">
@@ -162,11 +161,11 @@
                                         </div>
                                     </div>
                                 
-                                    @if ($message = Session::get('success'))
+                                    {{-- @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
                                         </div>
-                                    @endif
+                                    @endif --}}
                     
                                     <h5>Keranjang</h5>
                                     <table class="table table-striped" id="1">
@@ -223,7 +222,7 @@
                                         <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
-                                            <h5 class="modal-title" id="bayarLabel">Tambah Barang</h5>
+                                            <h5 class="modal-title" id="bayarLabel">Bayar Barang</h5>
                                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                 <span aria-hidden="true">&times;</span>
                                             </button>

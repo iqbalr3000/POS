@@ -41,8 +41,7 @@
 
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <a href="#" class="brand-link">
-                <img src="dist/img/Avatar.png" alt="" class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">POS</span>
+                <span class="brand-text font-weight-light">POINT OF SALES</span>
             </a>
 
             <div class="sidebar">
@@ -80,7 +79,7 @@
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
                             <li class="breadcrumb-item"><a href="#">Home</a></li>
-                            <li class="breadcrumb-item active">Transaction</li>
+                            <li class="breadcrumb-item active">Brands Report</li>
                             </ol>
                         </div>
                     </div>
@@ -129,32 +128,33 @@
 
                                     <table id="example2" class="table table-bordered table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>No</th>        
-                                            <th>Nama Barang</th>
-                                            <th>Tanggal Masuk</th>
-                                            <th>Harga Beli</th>
-                                            <th>Harga Jual</th>
-                                            <th>Stok Barang</th>
-                                            <th>Nama Merek</th>
-                                            <th>Nama Distributor</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($barang as $item)
-                                        <tr>
-                                            <td>{{ $loop->iteration }}</td>
-                                            <td>{{ $item->nama_barang }}</td>
-                                            <td>{{ $item->tanggal_masuk }}</td>
-                                            <td>Rp. {{ $item->harga_beli }}</td>
-                                            <td>Rp. {{ $item->harga_jual }}</td>
-                                            <td>{{ $item->stok_barang }}</td>
-                                            <td>{{ $item->merek->nama_merek }}</td>
-                                            <td>{{ $item->distributor->nama_distributor }}</td>
-                                        </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                            <tr>
+                                                <th>No</th>        
+                                                <th>Nama Barang</th>
+                                                <th>Tanggal Masuk</th>
+                                                <th>Harga Beli</th>
+                                                <th>Harga Jual</th>
+                                                <th>Stok Barang</th>
+                                                <th>Nama Merek</th>
+                                                <th>Nama Distributor</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($barang as $item)
+                                            <tr>
+                                                <td>{{ $loop->iteration }}</td>
+                                                <td>{{ $item->nama_barang }}</td>
+                                                <td>{{ $item->tanggal_masuk }}</td>
+                                                <td>Rp. {{ $item->harga_beli }}</td>
+                                                <td>Rp. {{ $item->harga_jual }}</td>
+                                                <td>{{ $item->stok_barang }}</td>
+                                                <td>{{ $item->merek->nama_merek }}</td>
+                                                <td>{{ $item->distributor->nama_distributor }}</td>
+                                            </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -185,10 +185,6 @@
     <!-- AdminLTE for demo purposes -->
     <script src="../../dist/js/demo.js"></script>
     <!-- page script -->
-
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.js"></script>
 
     <script>
     $(function () {

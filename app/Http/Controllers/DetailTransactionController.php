@@ -10,7 +10,7 @@ use App\Models\Transaction;
 class DetailTransactionController extends Controller
 {
 
-    public function store(Request $request)
+    public function store(Request $request, Transaction $transaction)
     {
         $request->validate([
             'id_user' => 'required',
@@ -20,15 +20,12 @@ class DetailTransactionController extends Controller
             'tanggal_beli' => 'required',
 
         ]);
-
-        $data = Transaction::find($request->id);
-            $data->update([
-                'status' => 'Sudah bayar',
-            ]);
     
+        Transaction::where('status', '=', 'Belum Bayar')->update(['status' => 'Sudah Bayar']);
+
         DetailTransaction::create($request->all());
      
-        return redirect()->route('transaction.index')
+        return redirect()->route('transactions.index')
                         ->with('success','Transaction created successfully.');
     }
 

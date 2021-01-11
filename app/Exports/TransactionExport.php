@@ -2,6 +2,7 @@
 
 namespace App\Exports;
 
+use App\Models\DetailTransaction;
 use App\Models\Transaction;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -13,17 +14,16 @@ class TransactionExport implements FromCollection, WithHeadings
     */
     public function collection()
     {
-        return Transaction::all();
+        return DetailTransaction::all();
     }
 
     public function headings(): array
     {
         return [
-            'id',
-            'id barang',
             'id user',
-            'jumlah beli',
-            'total harga',
+            'total bayar',
+            'uang bayar',
+            'kembalian',
             'tanggal beli',
             'created at',
             'updated at',
