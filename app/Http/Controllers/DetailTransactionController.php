@@ -21,13 +21,17 @@ class DetailTransactionController extends Controller
 
         ]);
     
-        Transaction::where('status', '=', 'Belum Bayar')->update(['status' => 'Sudah Bayar']);
+        if ($request->uang_bayar < $request->total_bayar) {
+            return redirect()->back()->with('alert','Uang yang anda masukan kurang.');
 
-        DetailTransaction::create($request->all());
-     
-        return redirect()->route('transactions.index')
-                        ->with('success','Transaction created successfully.');
+        } else {
+            Transaction::where('status', '=', 'Belum Bayar')->update(['status' => 'Sudah Bayar']);
+
+            DetailTransaction::create($request->all());
+        
+            return redirect()->route('transactions.index')
+                            ->with('success','Pembayaran selesai.');
+        }
     }
 
-    
 }

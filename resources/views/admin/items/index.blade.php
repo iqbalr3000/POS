@@ -229,8 +229,8 @@
                                                 <td>{{ $loop->iteration }}</td>
                                                 <td>{{ $item->id }}</td>
                                                 <td>{{ $item->nama_barang }}</td>
-                                                <td>{{ $item->id_merek }}</td>
-                                                <td>{{ $item->id_distributor }}</td>
+                                                <td>{{ $item->merek->nama_merek }}</td>
+                                                <td>{{ $item->distributor->nama_distributor }}</td>
                                                 <td>{{ $item->tanggal_masuk }}</td>
                                                 <td>Rp. {{ $item->harga_beli }}</td>
                                                 <td>Rp. {{ $item->harga_jual }}</td>

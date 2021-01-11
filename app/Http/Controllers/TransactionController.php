@@ -39,8 +39,7 @@ class TransactionController extends Controller
 
         Transaction::create($request->all());
 
-        return redirect()->route('transactions.index')
-                        ->with('success','Transaksi created successfully.');
+        return redirect()->route('transactions.index');
     }
 
     public function destroy(Transaction $transaction)
@@ -55,8 +54,7 @@ class TransactionController extends Controller
 
         $transaction->delete();
 
-        return redirect()->route('transactions.index')
-                        ->with('success','Transaksi deleted successfully.');
+        return redirect()->route('transactions.index');
     }
 
 

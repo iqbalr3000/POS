@@ -86,7 +86,7 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title">Add Brands</h3>
+                                    <h3 class="card-title">Transaction</h3>
                                 </div>
 
                                 <div class="card-body">
@@ -117,13 +117,14 @@
                                                         <div class="form-group">
                                                             <strong>ID Barang:</strong>
                                                             <select class="form-control"  name="id_barang" id="id_barang" searchable="Search here..">
-                                                                <option value disable>Pilih ID Barang</option>
+                                                                <option value="" disabled="disable" selected="selected">Pilih ID Barang</option>
                                                                 @foreach ($data as $item)
                                                                     <option value="{{ $item->id }}" data-harga="{{$item->harga_jual}}" data-stok="{{$item->stok_barang}}">
                                                                         {{ $item->nama_barang }}
                                                                     </option>
                                                                 @endforeach
                                                             </select>
+                                                            <small id="s"></small>
                                                         </div>
                                                     </div>
                                                     
@@ -154,18 +155,30 @@
                                             </div>
                                             <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Save</button>
+                                                    <button type="submit" class="btn btn-primary" id="tombol">Save</button>
                                                 </form>
                                             </div>
+
+                                            {{-- ini menampilkan error stok lebih --}}
+                                            @if (Session::get('stok_kurang'))
+                                                <div class="alert alert-danger mt-2">
+                                                    {{ Session::get('stok_kurang') }}
+                                                </div>
+                                                <script>
+                                                    $(function(){
+                                                        $('#exampleModal').modal('show');
+                                                    });
+                                                </script>
+                                            @endif
                                         </div>
                                         </div>
                                     </div>
                                 
-                                    {{-- @if ($message = Session::get('success'))
+                                    @if ($message = Session::get('success'))
                                         <div class="alert alert-success">
                                             <p>{{ $message }}</p>
                                         </div>
-                                    @endif --}}
+                                    @endif
                     
                                     <h5>Keranjang</h5>
                                     <table class="table table-striped" id="1">
@@ -334,25 +347,35 @@
         
             jQuery('#jumlah_beli').keyup(function(){
                 let jumlah_beli = jQuery('#jumlah_beli').val()
-                if(jumlah_beli > stok){
+                if(jumlah_beli < 0){
                     jQuery('#jumlah_beli').val();
-                    alert('Stok Tidak Mencukupi');
+                    alert('Masukan data dengan benar');
+                    document.getElementById("tombol").disabled = true;
                 }else{
-                    let total = parseInt(harga) * parseInt(jumlah_beli)
-        
-                    if (harga == "kosong") {
-                        total = ""
-                    }
-        
-                    if (jumlah_beli == "") {
-                        total = ""
-                    }
-        
-                    console.log(total);
-                    if(!isNaN(total)){
-                        jQuery('#total_harga').val(total)
+                    if(jumlah_beli > stok){
+                        jQuery('#jumlah_beli').val();
+                        alert('Stok Tidak Mencukupi');
+                        document.getElementById("tombol").disabled = true;
+                    }else{
+                        document.getElementById("tombol").disabled = false;
+
+                        let total = parseInt(harga) * parseInt(jumlah_beli)
+            
+                        if (harga == "kosong") {
+                            total = ""
+                        }
+            
+                        if (jumlah_beli == "") {
+                            total = ""
+                        }
+            
+                        console.log(total);
+                        if(!isNaN(total)){
+                            jQuery('#total_harga').val(total)
+                        }
                     }
                 }
+                
             })
         })
         });
@@ -367,7 +390,7 @@
                 let kembalian = parseInt(uang_bayar) - parseInt(total_bayar);
 
                 if (uang_bayar == "") {
-                    kembalian = ""
+                    kembalian == ""
                 }
 
                 console.log(kembalian);
@@ -378,5 +401,25 @@
             });
         });
     </script>
+
+    <script>
+        jQuery(document).ready(function(){
+            jQuery('select').change(function(){
+                let stok = jQuery(this).find(':selected').data('stok');
+
+                document.getElementById("s").innerHTML = 'Stok : ' + stok;
+            })
+        });
+    </script>
+
+    <script>
+        var msg = '{{Session::get('alert')}}';
+        var exist = '{{Session::has('alert')}}';
+
+        if(exist){
+            alert(msg);
+        }
+    </script>
+
 </body>
 </html>
